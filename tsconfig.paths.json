@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@entities/*": ["src/entities/*"],
+      "@common/*": ["src/common/*"],
+      "@modules/*": ["src/modules/*"],
+      "@tasks/*": ["src/tasks/*"],
+      "@libs/*": ["libs/*"],
+    }
+  }
+}

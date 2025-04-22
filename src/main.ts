@@ -1,8 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { startApplication } from '@src/app';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
-}
-bootstrap();
+startApplication()
+  .then((): void => {
+    console.log(`Process Start!!!`);
+  })
+  .catch((error: unknown): void => {
+    console.log(`Process Start Error!!! ${error}`);
+  });
