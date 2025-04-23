@@ -1,4 +1,4 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PostJobReqDto } from '@modules/job/dto/req/post-job.req.dto';
 import { Job } from '@entities/job.entity';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,5 +29,15 @@ export class JobService {
     const newJob = await this.jobRepository.create(job);
 
     return { id: newJob.id };
+  }
+
+  async findOne(id: string): Promise<Job> {
+    const job = await this.jobRepository.findById(id);
+
+    if (!job) {
+      throw new NotFoundException('job_not_found');
+    }
+
+    return job;
   }
 }

@@ -1,8 +1,9 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { JobService } from '@modules/job/job.service';
 import { PostJobReqDto } from '@modules/job/dto/req/post-job.req.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { IdParamsDto } from '@common/dto/id-params.dto';
+import { Job } from '@entities/job.entity';
 
 @Controller('jobs')
 export class JobController {
@@ -16,5 +17,15 @@ export class JobController {
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   async create(@Body() data: PostJobReqDto): Promise<IdParamsDto> {
     return await this.jobsService.create(data);
+  }
+
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'job 상세 조회' })
+  @ApiResponse({ status: 200, type: Job })
+  @ApiResponse({ status: 404, description: 'job_not_found' })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  findOne(@Param('id') id: string): Promise<Job> {
+    return this.jobsService.findOne(id);
   }
 }

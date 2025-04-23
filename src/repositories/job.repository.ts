@@ -19,7 +19,7 @@ export class JobRepository implements IJobRepository {
   }
 
   async findById(id: string): Promise<Job | null> {
-    const jobs: Job[] = await this.db.getData('jobs');
+    const jobs: Job[] = await this.db.getData('/jobs');
     return jobs.find((job) => job.id === id) || null;
   }
 
