@@ -23,7 +23,9 @@ export class JobRepository implements IJobRepository {
     return jobs.find((job) => job.id === id) || null;
   }
 
-  async findAll(): Promise<Job[]> {
+  async findAll(options: { status?: string; title?: string }): Promise<Job[]> {
+    const { status, title } = options;
+
     let jobs: Job[] = [];
     try {
       jobs = await this.db.getData('/jobs');
@@ -35,42 +37,22 @@ export class JobRepository implements IJobRepository {
       await this.db.push('/jobs', [], true);
       jobs = [];
     }
+
+    if (status) jobs = jobs.filter((job) => job.status === status);
+    if (title) jobs = jobs.filter((job) => job.title.includes(title));
+
     return jobs;
   }
 
   async create(job: Job): Promise<Job> {
-    const jobs: Job[] = await this.findAll();
+    const jobs: Job[] = await this.findAll({});
     jobs.push(job);
     await this.db.push('/jobs', jobs, true);
     return job;
   }
 
-  async update(id: string, data: Partial<Job>): Promise<Job | null> {
-    const jobs: Job[] = await this.findAll();
-    const idx = jobs.findIndex((job) => job.id === id);
-    if (idx === -1) return null;
-    jobs[idx] = { ...jobs[idx], ...data };
-    await this.db.push('jobs', jobs, true);
-    return jobs[idx];
-  }
-
-  async delete(id: string): Promise<boolean> {
-    const jobs: Job[] = await this.findAll();
-    const filtered = jobs.filter((job) => job.id !== id);
-    if (filtered.length === jobs.length) return false;
-    await this.db.push('jobs', filtered, true);
-    return true;
-  }
-
-  async search(params: { status?: string; title?: string }): Promise<Job[]> {
-    let jobs: Job[] = await this.findAll();
-    if (params.status) jobs = jobs.filter((job) => job.status === params.status);
-    if (params.title) jobs = jobs.filter((job) => job.title.includes(params.title));
-    return jobs;
-  }
-
   async exists(id: string): Promise<boolean> {
-    const jobs = await this.findAll();
+    const jobs = await this.findAll({});
     return jobs.some((job) => job.id === id);
   }
 }

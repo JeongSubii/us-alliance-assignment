@@ -7,6 +7,7 @@ import { JobRepository } from '@src/repositories/job.repository';
 import { IdParamsDto } from '@common/dto/id-params.dto';
 import { GetJobsResDto } from '@modules/job/dto/res/get-jobs.res.dto';
 import { BasicPaginationInput } from '@common/dto/basic-pagination.dto';
+import { GetJobsReqDto } from '@modules/job/dto/req/get-jobs.req.dto';
 
 @Injectable()
 export class JobService {
@@ -43,8 +44,8 @@ export class JobService {
     return job;
   }
 
-  async findAll({ page, limit }: BasicPaginationInput): Promise<GetJobsResDto> {
-    const allJobs: Job[] = await this.jobRepository.findAll();
+  async findAll({ status, title, page, limit }: GetJobsReqDto): Promise<GetJobsResDto> {
+    const allJobs: Job[] = await this.jobRepository.findAll({ status, title });
     const total = allJobs.length;
 
     const start = (page - 1) * limit;
