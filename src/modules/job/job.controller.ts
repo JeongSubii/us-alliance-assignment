@@ -1,9 +1,11 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { JobService } from '@modules/job/job.service';
 import { PostJobReqDto } from '@modules/job/dto/req/post-job.req.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { IdParamsDto } from '@common/dto/id-params.dto';
 import { Job } from '@entities/job.entity';
+import { GetJobsResDto } from '@modules/job/dto/res/get-jobs.res.dto';
+import { BasicPaginationInput } from '@common/dto/basic-pagination.dto';
 
 @Controller('jobs')
 export class JobController {
@@ -27,5 +29,14 @@ export class JobController {
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   findOne(@Param('id') id: string): Promise<Job> {
     return this.jobsService.findOne(id);
+  }
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'job 목록 조회' })
+  @ApiResponse({ status: 200, type: GetJobsResDto })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  async findAll(@Query() params: BasicPaginationInput): Promise<GetJobsResDto> {
+    return this.jobsService.findAll(params);
   }
 }
