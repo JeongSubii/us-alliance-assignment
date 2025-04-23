@@ -1,5 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
-import { Job } from '@entities/job.entity';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class PostJobReqDto {
