@@ -2,13 +2,23 @@
 
 ### Tech stack
 
-NestJs, Typescript, node-json-db, etc...
+NestJs, Typescript, node-json-db, Swagger etc...
 
 <br/>
 
 ### ERD
+```angular2html
+table: job
 
-[ERD 링크]()
+/src/entities/job.entity 
+```
+
+### API Docs (Swagger)
+```angular2html
+link: http://localhost:4000/swagger
+id: test
+pw: test1234
+```
 
 ### SETUP
 
@@ -19,13 +29,19 @@ NestJs, Typescript, node-json-db, etc...
 2. npm run start:dev
 ```
 
+### Comment
+```
+- API 디자인 및 서빙 전략
+- 데이터 처리 전략
+- 성능 관리 전략
+- 기타 구현 디테일
+```
 
 ### Author
 
 ```
-2025.04.22 ~
+2025.04.22 ~ 2025.04.25
 Author: Subi Jeong
-
 ```
 
 

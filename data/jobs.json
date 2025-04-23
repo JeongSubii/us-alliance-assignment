@@ -2,33 +2,33 @@
     "jobs": [
         {
             "id": "uuid-f59be961-6124-4ca5-b56f-c5cda779efeb",
-            "title": "유유유",
-            "description": "테스트",
-            "status": "completed",
+            "title": "test1",
+            "description": "test1-job",
+            "status": "pending",
             "createdAt": "2025-04-23T14:40:42.448Z",
             "updatedAt": "2025-04-23T14:40:52.013Z"
         },
         {
             "id": "uuid-67963878-61ea-4294-acef-423bd14d87d2",
-            "title": "유유유",
-            "description": "테스트",
-            "status": "completed",
+            "title": "test2",
+            "description": "test2-job",
+            "status": "pending",
             "createdAt": "2025-04-23T14:40:43.075Z",
             "updatedAt": "2025-04-23T14:40:52.017Z"
         },
         {
             "id": "uuid-c36f8627-cd26-4fe7-81df-52281760120b",
-            "title": "유유유",
-            "description": "테스트",
+            "title": "test3",
+            "description": "test3-job",
             "status": "completed",
             "createdAt": "2025-04-23T14:40:43.859Z",
             "updatedAt": "2025-04-23T14:40:52.018Z"
         },
         {
             "id": "uuid-098d6a9a-3916-4eea-b90f-f0a54f50fe26",
-            "title": "유유유",
-            "description": "테스트",
-            "status": "completed",
+            "title": "test4",
+            "description": "test4-job",
+            "status": "pending",
             "createdAt": "2025-04-23T14:40:44.209Z",
             "updatedAt": "2025-04-23T14:40:52.020Z"
         }
