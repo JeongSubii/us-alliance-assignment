@@ -15,6 +15,7 @@ export class JobController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'job 생성' })
   @ApiResponse({ status: 201, type: IdParamsDto })
+  @ApiResponse({ status: 400, type: 'string' })
   @ApiResponse({ status: 409, description: 'duplicate_id' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   async create(@Body() data: PostJobReqDto): Promise<IdParamsDto> {
@@ -25,6 +26,7 @@ export class JobController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'job 상세 조회' })
   @ApiResponse({ status: 200, type: Job })
+  @ApiResponse({ status: 400, type: 'string' })
   @ApiResponse({ status: 404, description: 'job_not_found' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   findOne(@Param('id') id: string): Promise<Job> {
@@ -35,6 +37,7 @@ export class JobController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'job 목록 조회' })
   @ApiResponse({ status: 200, type: GetJobsResDto })
+  @ApiResponse({ status: 400, type: 'string' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   async findAll(@Query() params: BasicPaginationInput): Promise<GetJobsResDto> {
     return this.jobsService.findAll(params);
