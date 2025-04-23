@@ -1,12 +1,12 @@
 import { Type } from 'class-transformer';
 import { ValidateNested, IsArray, IsInt } from 'class-validator';
-import { GetJobResDto } from '@modules/job/dto/res/get-job.res.dto';
+import { Job } from '@entities/job.entity';
 
 export class GetJobsResDto {
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => GetJobResDto)
-  data: GetJobResDto[];
+  @Type(() => Job)
+  data: Job[];
 
   @IsInt()
   total: number;

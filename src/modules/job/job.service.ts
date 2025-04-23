@@ -6,8 +6,6 @@ import { JobStatusType } from '@common/enums/job';
 import { JobRepository } from '@src/repositories/job.repository';
 import { IdParamsDto } from '@common/dto/id-params.dto';
 import { GetJobsResDto } from '@modules/job/dto/res/get-jobs.res.dto';
-import { GetJobsReqDto } from '@modules/job/dto/req/get-jobs.req.dto';
-import { GetJobResDto } from '@modules/job/dto/res/get-job.res.dto';
 
 @Injectable()
 export class JobService {
@@ -34,7 +32,7 @@ export class JobService {
     return { id: newJob.id };
   }
 
-  async findOne(id: string): Promise<GetJobResDto> {
+  async findOne(id: string): Promise<Job> {
     const job = await this.jobRepository.findById(id);
 
     if (!job) {
@@ -44,7 +42,8 @@ export class JobService {
     return job;
   }
 
-  async findAll({ status, title, page, limit }: GetJobsReqDto): Promise<GetJobsResDto> {
+  async findAll(options: { status?; title?; page; limit }): Promise<GetJobsResDto> {
+    const { status, title, page, limit } = options;
     const allJobs: Job[] = await this.jobRepository.findAll({ status, title });
     const total = allJobs.length;
 
