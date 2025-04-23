@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { JsonDbModule } from './common/json-db.module';
+import { JsonDbModule } from '@libs/database/json-db.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from '@src/config/index';
 import * as Joi from 'joi';
+import { JobModule } from '@modules/job/job.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import * as Joi from 'joi';
         PORT: Joi.number().default(4000),
       }),
     }),
+    JobModule,
   ],
   controllers: [AppController],
   providers: [AppService],

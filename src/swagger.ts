@@ -24,7 +24,7 @@ export default async function (app: INestApplication): Promise<void> {
       .setTitle(`${packageJson.name} API`)
       .setDescription(description)
       .setVersion(packageJson.version)
-      .setExternalDoc('swagger.json', 'swagger/common-json')
+      .setExternalDoc('swagger.json', 'swagger/swagger-json')
       .build();
 
     const apiDoc: OpenAPIObject = SwaggerModule.createDocument(app, apiConfig, {

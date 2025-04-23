@@ -1,10 +1,27 @@
 import { JobStatusType } from '@common/enums/job';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
-export interface Job {
+export class Job {
+  @IsString()
+  @IsNotEmpty()
   id: string;
-  title: string;
-  description: string;
-  status: JobStatusType;
-  createdAt: string;
+
+  @IsString()
+  @IsNotEmpty()
   updatedAt: string;
+
+  @IsString()
+  @IsNotEmpty()
+  createdAt: string;
+
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+
+  @IsEnum(JobStatusType)
+  status: JobStatusType;
 }
