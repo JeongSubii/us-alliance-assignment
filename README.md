@@ -8,9 +8,8 @@ NestJs, Typescript, node-json-db, Swagger etc...
 
 ### ERD
 ```angular2html
-table: job
-
-/src/entities/job.entity 
+테이블명 : job
+파일 위치: /src/entities/job.entity 
 ```
 
 ### API Docs (Swagger)
