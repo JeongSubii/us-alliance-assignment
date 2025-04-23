@@ -25,7 +25,6 @@ export class JobRepository implements IJobRepository {
 
   async findAll(options: { status?: string; title?: string }): Promise<Job[]> {
     const { status, title } = options;
-
     let jobs: Job[] = [];
     try {
       jobs = await this.db.getData('/jobs');
@@ -49,6 +48,15 @@ export class JobRepository implements IJobRepository {
     jobs.push(job);
     await this.db.push('/jobs', jobs, true);
     return job;
+  }
+
+  async update(id: string, data: Partial<Job>): Promise<Job | null> {
+    const jobs: Job[] = await this.findAll({});
+    const idx = jobs.findIndex((job) => job.id === id);
+    if (idx === -1) return null;
+    jobs[idx] = { ...jobs[idx], ...data };
+    await this.db.push('/jobs', jobs, true);
+    return jobs[idx];
   }
 
   async exists(id: string): Promise<boolean> {

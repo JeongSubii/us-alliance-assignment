@@ -1,44 +1,36 @@
 {
     "jobs": [
         {
-            "id": "uuid-93396327-8e68-4a25-b617-7a4ddab97dc2",
-            "title": "정수비",
-            "description": "123123",
-            "status": "pending",
-            "createdAt": "2025-04-23T04:47:29.510Z",
-            "updatedAt": "2025-04-23T04:47:29.510Z"
-        },
-        {
-            "id": "uuid-778b6bb7-6d3b-4efb-8028-1c6c923d54a7",
-            "title": "김민서",
-            "description": "123123",
-            "status": "pending",
-            "createdAt": "2025-04-23T04:47:42.958Z",
-            "updatedAt": "2025-04-23T04:47:42.958Z"
-        },
-        {
-            "id": "uuid-778b6bb7-6d3b-4efb-8028-1c6c923d54a4",
-            "title": "김지우",
-            "description": "123123",
+            "id": "uuid-f59be961-6124-4ca5-b56f-c5cda779efeb",
+            "title": "유유유",
+            "description": "테스트",
             "status": "completed",
-            "createdAt": "2025-04-23T04:53:15.206Z",
-            "updatedAt": "2025-04-23T04:53:15.206Z"
+            "createdAt": "2025-04-23T14:40:42.448Z",
+            "updatedAt": "2025-04-23T14:40:52.013Z"
         },
         {
-            "id": "uuid-41d740f9-f1d5-4868-a807-e1d462628b16",
-            "title": "우유진",
+            "id": "uuid-67963878-61ea-4294-acef-423bd14d87d2",
+            "title": "유유유",
             "description": "테스트",
-            "status": "pending",
-            "createdAt": "2025-04-23T05:48:04.905Z",
-            "updatedAt": "2025-04-23T05:48:04.905Z"
+            "status": "completed",
+            "createdAt": "2025-04-23T14:40:43.075Z",
+            "updatedAt": "2025-04-23T14:40:52.017Z"
         },
         {
-            "id": "uuid-11a8ad70-94e5-45b7-82ea-7176f53b39fe",
-            "title": "우유진",
+            "id": "uuid-c36f8627-cd26-4fe7-81df-52281760120b",
+            "title": "유유유",
             "description": "테스트",
-            "status": "pending",
-            "createdAt": "2025-04-23T08:10:48.178Z",
-            "updatedAt": "2025-04-23T08:10:48.178Z"
+            "status": "completed",
+            "createdAt": "2025-04-23T14:40:43.859Z",
+            "updatedAt": "2025-04-23T14:40:52.018Z"
+        },
+        {
+            "id": "uuid-098d6a9a-3916-4eea-b90f-f0a54f50fe26",
+            "title": "유유유",
+            "description": "테스트",
+            "status": "completed",
+            "createdAt": "2025-04-23T14:40:44.209Z",
+            "updatedAt": "2025-04-23T14:40:52.020Z"
         }
     ]
 }

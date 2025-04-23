@@ -5,13 +5,7 @@ import { JobController } from '@modules/job/job.controller';
 
 @Module({
   controllers: [JobController],
-  providers: [
-    JobService,
-    {
-      provide: 'JobRepository',
-      useClass: JobRepository,
-    },
-  ],
+  providers: [JobService, JobRepository],
   exports: [JobService],
 })
 export class JobModule {}

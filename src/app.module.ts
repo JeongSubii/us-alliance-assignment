@@ -6,9 +6,12 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from '@src/config/index';
 import * as Joi from 'joi';
 import { JobModule } from '@modules/job/job.module';
+import { TasksModule } from '@tasks/tasks.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     JsonDbModule,
     ConfigModule.forRoot({
       load: [configuration],
@@ -19,6 +22,7 @@ import { JobModule } from '@modules/job/job.module';
       }),
     }),
     JobModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

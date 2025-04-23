@@ -39,7 +39,7 @@ async function createApplication(): Promise<void> {
   application = await NestFactory.create(AppModule, new ExpressAdapter(server), {
     // bufferLogs: true,
     autoFlushLogs: !isLocalEnvironment,
-    logger: ['verbose', 'error', 'debug'],
+    logger: ['log', 'verbose', 'error', 'warn', 'debug'],
   });
 }
 

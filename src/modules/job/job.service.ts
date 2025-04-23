@@ -9,7 +9,7 @@ import { GetJobsResDto } from '@modules/job/dto/res/get-jobs.res.dto';
 
 @Injectable()
 export class JobService {
-  constructor(@Inject('JobRepository') private readonly jobRepository: JobRepository) {}
+  constructor(private readonly jobRepository: JobRepository) {}
 
   async create({ title, description }: PostJobReqDto): Promise<IdParamsDto> {
     const now = new Date().toISOString();
