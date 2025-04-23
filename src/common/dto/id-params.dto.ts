@@ -5,8 +5,4 @@ export class IdParamsDto {
   @ApiProperty()
   @IsString()
   id: string;
-
-  constructor(partial: Partial<IdParamsDto>) {
-    Object.assign(this, partial);
-  }
 }

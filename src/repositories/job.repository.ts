@@ -4,6 +4,7 @@ import { IJobRepository } from '@common/interfaces/job-repository';
 import { Job } from '@entities/job.entity';
 import * as path from 'path';
 import * as fs from 'fs';
+import { GetJobResDto } from '@modules/job/dto/res/get-job.res.dto';
 
 const dbFolder = path.join(process.cwd(), 'data');
 if (!fs.existsSync(dbFolder)) {
@@ -18,7 +19,7 @@ export class JobRepository implements IJobRepository {
     this.db = new JsonDB(new Config('data/jobs', true, true, '/'));
   }
 
-  async findById(id: string): Promise<Job | null> {
+  async findById(id: string): Promise<Job | null | GetJobResDto> {
     const jobs: Job[] = await this.db.getData('/jobs');
     return jobs.find((job) => job.id === id) || null;
   }
