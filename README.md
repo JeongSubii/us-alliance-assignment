@@ -12,6 +12,16 @@ NestJs, Typescript, node-json-db, Swagger, etc...
 파일 위치: /src/entities/job.entity 
 ```
 
+### data
+```angular2html
+/data/job.json
+```
+
+### scheduler logs
+```angular2html
+/logs/logs.txt
+```
+
 ### API Docs (Swagger)
 ```angular2html
 link: http://localhost:4000/swagger
