@@ -5,6 +5,7 @@ import { Job } from '@entities/job.entity';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Mutex } from 'async-mutex';
+import { GetJobsResDto } from '@modules/job/dto/res/get-jobs.res.dto';
 
 const writeMutex = new Mutex();
 const dbFolder = path.join(process.cwd(), 'data');
@@ -21,17 +22,27 @@ export class JobRepository implements IJobRepository {
   }
 
   async findById(id: string): Promise<Job | null> {
-    return await this.db.getData(`/jobs/${id}`);
+    try {
+      return await this.db.getData(`/jobs/${id}`);
+    } catch (error) {
+      return null;
+    }
   }
 
-  async findAll(options: { status?: string; title?: string }): Promise<Job[]> {
-    const { status, title } = options;
+  async findAll(options: {
+    status?: string;
+    title?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<GetJobsResDto> {
+    const { status, title, page, limit } = options;
     let jobs: Record<string, Job> = {};
 
     try {
       jobs = await this.db.getData('/jobs');
     } catch (e) {
       await this.db.push('/jobs', {}, true);
+      jobs = {};
     }
 
     let jobList = Object.values(jobs);
@@ -39,7 +50,16 @@ export class JobRepository implements IJobRepository {
     if (status) jobList = jobList.filter((job) => job.status === status);
     if (title) jobList = jobList.filter((job) => job.title.includes(title));
 
-    return jobList;
+    const total = jobList.length;
+    let data = jobList;
+
+    if (page && limit) {
+      const start = (page - 1) * limit;
+      const end = start + limit;
+      data = jobList.slice(start, end);
+    }
+
+    return { data, total };
   }
 
   async create(job: Job): Promise<Job> {

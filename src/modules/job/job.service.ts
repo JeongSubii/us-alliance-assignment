@@ -44,12 +44,12 @@ export class JobService {
 
   async findAll(options: { status?; title?; page; limit }): Promise<GetJobsResDto> {
     const { status, title, page, limit } = options;
-    const allJobs: Job[] = await this.jobRepository.findAll({ status, title });
-    const total = allJobs.length;
-
-    const start = (page - 1) * limit;
-    const end = start + limit;
-    const data = allJobs.slice(start, end);
+    const { data, total }: GetJobsResDto = await this.jobRepository.findAll({
+      status,
+      title,
+      page,
+      limit,
+    });
 
     return { data, total };
   }

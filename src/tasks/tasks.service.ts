@@ -18,10 +18,10 @@ export class TasksService {
     }
   }
 
-  @Cron('* * * * *', {
-    name: 'handlePendingJobs',
-    timeZone: 'Asia/Seoul',
-  })
+  // @Cron('* * * * *', {
+  //   name: 'handlePendingJobs',
+  //   timeZone: 'Asia/Seoul',
+  // })
   async handlePendingJobs() {
     this.logger.warn('handle-pending-jobs @Timeout operation start!');
     try {
@@ -29,7 +29,7 @@ export class TasksService {
         status: JobStatusType.pending,
       });
 
-      const updates = pendingJobs.map((job) => ({
+      const updates = pendingJobs.data.map((job) => ({
         id: job.id,
         data: {
           status: JobStatusType.completed,
