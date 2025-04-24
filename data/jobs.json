@@ -1,36 +1,44 @@
 {
-    "jobs": [
-        {
-            "id": "uuid-f59be961-6124-4ca5-b56f-c5cda779efeb",
+    "jobs": {
+        "uuid-d02e3e35-c78a-4e4c-a046-10440e52a116": {
+            "id": "uuid-d02e3e35-c78a-4e4c-a046-10440e52a116",
             "title": "test1",
             "description": "test1-job",
-            "status": "completed",
-            "createdAt": "2025-04-23T14:40:42.448Z",
-            "updatedAt": "2025-04-23T15:08:00.160Z"
+            "status": "pending",
+            "createdAt": "2025-04-24T02:53:05.207Z",
+            "updatedAt": "2025-04-24T02:53:05.207Z"
         },
-        {
-            "id": "uuid-67963878-61ea-4294-acef-423bd14d87d2",
+        "uuid-3d07ad66-8991-4e32-a133-bfbf996c18f5": {
+            "id": "uuid-3d07ad66-8991-4e32-a133-bfbf996c18f5",
             "title": "test2",
             "description": "test2-job",
-            "status": "completed",
-            "createdAt": "2025-04-23T14:40:43.075Z",
-            "updatedAt": "2025-04-23T15:08:00.162Z"
+            "status": "pending",
+            "createdAt": "2025-04-24T03:10:22.743Z",
+            "updatedAt": "2025-04-24T03:10:22.743Z"
         },
-        {
-            "id": "uuid-c36f8627-cd26-4fe7-81df-52281760120b",
+        "uuid-d62ecc7a-8b01-4b1b-9189-96f99220b178": {
+            "id": "uuid-d62ecc7a-8b01-4b1b-9189-96f99220b178",
             "title": "test3",
             "description": "test3-job",
-            "status": "completed",
-            "createdAt": "2025-04-23T14:40:43.859Z",
-            "updatedAt": "2025-04-23T14:40:52.018Z"
+            "status": "pending",
+            "createdAt": "2025-04-24T03:10:26.868Z",
+            "updatedAt": "2025-04-24T03:10:26.868Z"
         },
-        {
-            "id": "uuid-098d6a9a-3916-4eea-b90f-f0a54f50fe26",
+        "uuid-4794c36e-a8c7-452e-a46f-c17304bb25ed": {
+            "id": "uuid-4794c36e-a8c7-452e-a46f-c17304bb25ed",
             "title": "test4",
             "description": "test4-job",
-            "status": "completed",
-            "createdAt": "2025-04-23T14:40:44.209Z",
-            "updatedAt": "2025-04-23T15:08:00.163Z"
+            "status": "pending",
+            "createdAt": "2025-04-24T03:10:30.864Z",
+            "updatedAt": "2025-04-24T03:10:30.864Z"
+        },
+        "uuid-ba5083a5-6b19-4115-8102-31516b2102f1": {
+            "id": "uuid-ba5083a5-6b19-4115-8102-31516b2102f1",
+            "title": "test5",
+            "description": "test5-job",
+            "status": "pending",
+            "createdAt": "2025-04-24T03:10:34.756Z",
+            "updatedAt": "2025-04-24T03:10:34.756Z"
         }
-    ]
+    }
 }

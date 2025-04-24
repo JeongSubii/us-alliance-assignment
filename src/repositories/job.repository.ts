@@ -21,52 +21,67 @@ export class JobRepository implements IJobRepository {
   }
 
   async findById(id: string): Promise<Job | null> {
-    const jobs: Job[] = await this.db.getData('/jobs');
-    return jobs.find((job) => job.id === id) || null;
+    return await this.db.getData(`/jobs/${id}`);
   }
 
   async findAll(options: { status?: string; title?: string }): Promise<Job[]> {
     const { status, title } = options;
-    let jobs: Job[] = [];
+    let jobs: Record<string, Job> = {};
+
     try {
       jobs = await this.db.getData('/jobs');
-      if (!Array.isArray(jobs)) {
-        await this.db.push('/jobs', [], true);
-        jobs = [];
-      }
     } catch (e) {
-      await this.db.push('/jobs', [], true);
-      jobs = [];
+      await this.db.push('/jobs', {}, true);
     }
 
-    if (status) jobs = jobs.filter((job) => job.status === status);
-    if (title) jobs = jobs.filter((job) => job.title.includes(title));
+    let jobList = Object.values(jobs);
 
-    return jobs;
+    if (status) jobList = jobList.filter((job) => job.status === status);
+    if (title) jobList = jobList.filter((job) => job.title.includes(title));
+
+    return jobList;
   }
 
   async create(job: Job): Promise<Job> {
     return await writeMutex.runExclusive(async () => {
-      const jobs: Job[] = await this.findAll({});
-      jobs.push(job);
-      await this.db.push('/jobs', jobs, true);
+      await this.db.push(`/jobs/${job.id}`, job, true);
       return job;
     });
   }
 
   async update(id: string, data: Partial<Job>): Promise<Job | null> {
     return await writeMutex.runExclusive(async () => {
-      const jobs: Job[] = await this.findAll({});
-      const idx = jobs.findIndex((job) => job.id === id);
-      if (idx === -1) return null;
-      jobs[idx] = { ...jobs[idx], ...data };
-      await this.db.push('/jobs', jobs, true);
-      return jobs[idx];
+      try {
+        const existing = await this.db.getData(`/jobs/${id}`);
+        const updated = { ...existing, ...data, updatedAt: new Date().toISOString() };
+        await this.db.push(`/jobs/${id}`, updated, true);
+        return updated;
+      } catch (e) {
+        return null;
+      }
+    });
+  }
+
+  async updateMany(updates: Array<{ id: string; data: Partial<Job> }>) {
+    return await writeMutex.runExclusive(async () => {
+      for (const { id, data } of updates) {
+        try {
+          const existing = await this.db.getData(`/jobs/${id}`);
+          const updated = { ...existing, ...data };
+          await this.db.push(`/jobs/${id}`, updated, true);
+        } catch (e) {
+          continue;
+        }
+      }
     });
   }
 
   async exists(id: string): Promise<boolean> {
-    const jobs = await this.findAll({});
-    return jobs.some((job) => job.id === id);
+    try {
+      await this.db.getData(`/jobs/${id}`);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
