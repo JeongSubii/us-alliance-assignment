@@ -52,7 +52,7 @@ pw: test1234
     - Swagger 기반 문서화
         : `@ApiOperation`, `@ApiResponse` 등으로 API 명세 자동화
     - DTO 활용
-        : 요청/응답 구조를 명확히 정의해 타입 안정성 및 문서화 동시 달성
+        : 요청/응답 구조를 명확히 정의해 타입 안정성
     - config(@nestjs/config) 파일로 환경변수 관리
         : 기존 key-value(.env) 형식이 아닌 객체 형식(config)으로 관리함으로써, 타입안정성 및 그룹화, 의존성 주입 용이 
 	    
@@ -77,7 +77,7 @@ pw: test1234
     - common 폴더
         : 공통으로 쓰이는 dto, enum, interface를 공통(common) 폴더에서 관리
     - node-json-db 구조 변경
-        : 기존 배열 → 객체 구조로 변경해 O(n) -> O(1) 조회 성능 달성
+        : 기존 배열 → 객체 구조로 변경해 O(n) -> O(1) 조회 성능 향상
 	    
 <기타 구현 디테일>
     - 폴더 자동 생성
