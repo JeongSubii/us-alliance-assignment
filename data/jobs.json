@@ -12,9 +12,9 @@
             "id": "uuid-3d07ad66-8991-4e32-a133-bfbf996c18f5",
             "title": "test2",
             "description": "test2-job",
-            "status": "pending",
+            "status": "completed",
             "createdAt": "2025-04-24T03:10:22.743Z",
-            "updatedAt": "2025-04-24T03:10:22.743Z"
+            "updatedAt": "2025-04-24T03:20:14.015Z"
         },
         "uuid-d62ecc7a-8b01-4b1b-9189-96f99220b178": {
             "id": "uuid-d62ecc7a-8b01-4b1b-9189-96f99220b178",
@@ -28,17 +28,17 @@
             "id": "uuid-4794c36e-a8c7-452e-a46f-c17304bb25ed",
             "title": "test4",
             "description": "test4-job",
-            "status": "pending",
+            "status": "completed",
             "createdAt": "2025-04-24T03:10:30.864Z",
-            "updatedAt": "2025-04-24T03:10:30.864Z"
+            "updatedAt": "2025-04-24T03:20:14.015Z"
         },
         "uuid-ba5083a5-6b19-4115-8102-31516b2102f1": {
             "id": "uuid-ba5083a5-6b19-4115-8102-31516b2102f1",
             "title": "test5",
             "description": "test5-job",
-            "status": "pending",
+            "status": "completed",
             "createdAt": "2025-04-24T03:10:34.756Z",
-            "updatedAt": "2025-04-24T03:10:34.756Z"
+            "updatedAt": "2025-04-24T03:20:14.015Z"
         }
     }
 }

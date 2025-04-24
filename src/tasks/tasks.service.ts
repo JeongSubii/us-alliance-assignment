@@ -4,6 +4,7 @@ import { JobStatusType } from '@common/enums/job';
 import * as fs from 'fs';
 import * as path from 'path';
 import { JobRepository } from '@src/repositories/job.repository';
+import { Job } from '@entities/job.entity';
 
 @Injectable()
 export class TasksService {
@@ -17,10 +18,10 @@ export class TasksService {
     }
   }
 
-  // @Cron('* * * * * *', {
-  //   name: 'handlePendingJobs',
-  //   timeZone: 'Asia/Seoul',
-  // })
+  @Cron('* * * * *', {
+    name: 'handlePendingJobs',
+    timeZone: 'Asia/Seoul',
+  })
   async handlePendingJobs() {
     this.logger.warn('handle-pending-jobs @Timeout operation start!');
     try {
@@ -28,19 +29,23 @@ export class TasksService {
         status: JobStatusType.pending,
       });
 
-      for (const job of pendingJobs) {
-        await this.jobRepository.update(job.id, {
+      const updates = pendingJobs.map((job) => ({
+        id: job.id,
+        data: {
           status: JobStatusType.completed,
           updatedAt: new Date().toISOString(),
-        });
+        } as Partial<Job>,
+      }));
 
-        const logMessage = `[${new Date().toISOString()}] Updated job ${
-          job.id
-        } from pending to completed\n`;
+      await this.jobRepository.updateMany(updates);
 
-        this.logger.log(logMessage.trim());
-        await fs.promises.appendFile(this.logFilePath, logMessage);
-      }
+      const logMessage = `[${new Date().toISOString()}] Updated ${
+        updates.length
+      } jobs from pending to completed\n`;
+
+      this.logger.log(logMessage.trim());
+      await fs.promises.appendFile(this.logFilePath, logMessage);
+
       this.logger.log('update jobs succeed');
     } catch (error) {
       this.logger.error(`update jobs failed: ${error.message}`);
