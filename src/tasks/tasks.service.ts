@@ -18,10 +18,10 @@ export class TasksService {
     }
   }
 
-  // @Cron('* * * * *', {
-  //   name: 'handlePendingJobs',
-  //   timeZone: 'Asia/Seoul',
-  // })
+  @Cron('* * * * *', {
+    name: 'handlePendingJobs',
+    timeZone: 'Asia/Seoul',
+  })
   async handlePendingJobs() {
     this.logger.warn('handle-pending-jobs @Timeout operation start!');
     try {
@@ -37,11 +37,15 @@ export class TasksService {
         } as Partial<Job>,
       }));
 
+      const jobIds = updates.map((job) => {
+        return job.id;
+      });
+
       await this.jobRepository.updateMany(updates);
 
       const logMessage = `[${new Date().toISOString()}] Updated ${
         updates.length
-      } jobs from pending to completed\n`;
+      } jobs from pending to completed\nIds:${jobIds}\n`;
 
       this.logger.log(logMessage.trim());
       await fs.promises.appendFile(this.logFilePath, logMessage);
