@@ -4,7 +4,9 @@ import { IJobRepository } from '@common/interfaces/job-repository';
 import { Job } from '@entities/job.entity';
 import * as path from 'path';
 import * as fs from 'fs';
+import { Mutex } from 'async-mutex';
 
+const writeMutex = new Mutex();
 const dbFolder = path.join(process.cwd(), 'data');
 if (!fs.existsSync(dbFolder)) {
   fs.mkdirSync(dbFolder);
@@ -44,19 +46,23 @@ export class JobRepository implements IJobRepository {
   }
 
   async create(job: Job): Promise<Job> {
-    const jobs: Job[] = await this.findAll({});
-    jobs.push(job);
-    await this.db.push('/jobs', jobs, true);
-    return job;
+    return await writeMutex.runExclusive(async () => {
+      const jobs: Job[] = await this.findAll({});
+      jobs.push(job);
+      await this.db.push('/jobs', jobs, true);
+      return job;
+    });
   }
 
   async update(id: string, data: Partial<Job>): Promise<Job | null> {
-    const jobs: Job[] = await this.findAll({});
-    const idx = jobs.findIndex((job) => job.id === id);
-    if (idx === -1) return null;
-    jobs[idx] = { ...jobs[idx], ...data };
-    await this.db.push('/jobs', jobs, true);
-    return jobs[idx];
+    return await writeMutex.runExclusive(async () => {
+      const jobs: Job[] = await this.findAll({});
+      const idx = jobs.findIndex((job) => job.id === id);
+      if (idx === -1) return null;
+      jobs[idx] = { ...jobs[idx], ...data };
+      await this.db.push('/jobs', jobs, true);
+      return jobs[idx];
+    });
   }
 
   async exists(id: string): Promise<boolean> {
