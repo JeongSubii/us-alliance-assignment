@@ -30,7 +30,7 @@ pw: test1234
 
 ### Comment
 ```
-- API 디자인 및 서빙 전략
+<API 디자인 및 서빙 전략>
     - module-controller-service-repository 패턴
         : 데이터 조회로직을 repository로 분리
     - entity class로 타입 안정성 확보
@@ -46,7 +46,7 @@ pw: test1234
     - config(@nestjs/config) 파일로 환경변수 관리
         : 기존 key-value(.env) 형식이 아닌 객체 형식(config)으로 관리함으로써, 타입안정성 및 그룹화, 의존성 주입 용이 
 	    
-- 데이터 처리 전략
+<데이터 처리 전략>
     - 파일 기반 데이터베이스(node-json-db)
         : 경량 서비스에 적합하며, 별도 DB 구축 없이 빠른 개발 가능
     - 동시성 제어(Mutex)
@@ -54,7 +54,7 @@ pw: test1234
     - 배치/스케줄러
         : NestJS Schedule로 주기적 상태 변경 및 로그 기록
 	    
-- 성능 관리 전략
+<성능 관리 전략>
     - 페이징 처리
         : 대량 데이터 조회 시 slice로 페이징(네트워크 전송량만 줄임)
         ** 필요시 DB 전환 고려 (데이터가 적을 때는 실용적이지만, 데이터가 많아지면 반드시 DBMS로 전환하거나, Stream(stream-json, JSONStream 라이브러리) 등 다른 구조로 리팩터링)
@@ -65,7 +65,7 @@ pw: test1234
     - common 폴더
         : 공통으로 쓰이는 dto, enum, interface를 공통(common) 폴더에서 관리
 	    
-- 기타 구현 디테일
+<기타 구현 디테일>
     - 폴더 자동 생성
         : 데이터/로그 폴더가 없으면 자동 생성하여 배포 환경에서도 문제 없이 동작
     - 타임존 명시
